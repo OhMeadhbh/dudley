@@ -24,18 +24,10 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">{{title}}</a>
+          <a class="navbar-brand" href="{{#if root}}{{root}}{{#else}}/{{/if}}">{{title}}</a>
         </div>
       </div>
     </nav>
-
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>{{title}}</h1>
-        {{#if subtitle}}<p>{{subtitle}}</p>{{/if}}
-      </div>
-    </div>
 
     {{{body}}}
 
