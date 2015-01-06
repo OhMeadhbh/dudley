@@ -1,0 +1,6 @@
+{
+  "title": "Dudley",
+  "subtitle": "a web/blogging engine using node and handlebars",
+  "theme": "bootstrap",
+  "ignore": [ "Makefile" ]
+}
