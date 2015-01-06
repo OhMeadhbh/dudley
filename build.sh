@@ -7,3 +7,4 @@ TEMPDIR=`mktemp -d`
 dudley --source . --destination $TEMPDIR
 git checkout gh-pages
 cp -r $TEMPDIR/* .
+rm -rf $TEMPDIR
