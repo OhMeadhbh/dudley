@@ -34,9 +34,185 @@
     <div class="col-md-12 item">
       <h2>Tutorial</h2>
       <p>
-        Some day this boilerplate will be replaced with
-        documentation. But alas, that day has yet to come.
+        This tutorial will step you through the process of creating a
+        simple informational site with Dudley. It assumes you've
+        already installed <a href="http://nodejs.org/">Node.JS</a> and
+        have root access to a Unix-like machine (Linux, MacOS-X, *BSD,
+        etc.)
       </p>
+
+      <hr/>
+
+      <p>
+        Dudley is a simple tool. It scans an input directory looking for
+        files that begin with an underbar. It runs these files through
+        a templating engine writing the results to a file in the output
+        directory. Files that don't begin with an underbar are copied
+        without processing.
+      </p>
+
+      <p>
+        Dudley uses 'themes' to store boilerplate content you may want
+        to re-use from project to project. In this tutorial, we're going
+        to use the <strong>bootstrap</strong> theme.
+      </p>
+
+      <p>
+        Each dudley project <em>should</em> have a <code>_horse.json</code>
+        file at the top level of the input directory. This file contains
+        site information and processing defaults.
+      </p>
+
+      <p>
+        In this tutorial, we're going to build a simple web site by installing
+        dudley, creating the input content, running dudley and then observing
+        what it created.
+      </p>
+
+      <h3>Step 1. Install Dudley</h3>
+      <p>
+        Installing Dudley is simple. Just issue the
+        following <code>npm</code> command:
+      </p>
+
+      <p style="background-color: black; color: white; width:100%"><pre>sudo npm install -g dudley</pre></p>
+
+      <p>
+        <code>NPM</code> will take a few moments to install the package.
+      </p>
+
+      <h3>Step 2. Create Some Content</h3>
+      <p>
+        Let's start by creating a directory to contain our content:
+      </p>
+
+      <p style="background-color: black; color: white; width:100%"><pre>mkdir content</pre></p>
+
+      <p>
+        Once you've created the content directory, use your favourite
+        text editor to copy these files into it:
+      </p>
+
+      <p>File: _index.html<br/><pre>&lt;div class="jumbotron"&gt;
+  &lt;div class="container"&gt;
+    &lt;h1&gt;&lbrace;&lbrace;title&rbrace;&rbrace;&lt;/h1&gt;
+    &lbrace;&lbrace;#if subtitle&rbrace;&rbrace;&lt;p&gt;&lbrace;&lbrace;subtitle&rbrace;&rbrace;&lt;/p&gt;&lbrace;&lbrace;/if&rbrace;&rbrace;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="container"%gt;
+  &lt;div class="row"%gt;
+    &lt;div class="col-md-12 item"%gt;
+      &lt;h2%gt;Some Example Content&lt;/h2%gt;
+      &lt;p%gt;
+        So this is just some sample content that was converted from an HTML
+        fragment into a "real" HTML web page with Dudley. By default, html
+        files that begin with underscores are processed using Handlebars and
+        have a web scaffolding placed around it.
+      &lt;/p%gt;
+
+      &lt;p%gt;
+        Files whose names begin with an underscore are just copied from the
+        source directory to the destination directory. Here's a link to
+        &lt;a href="static.html"%gt;static.html&lt;/a%gt;, a file that &lt;i%gt;shouldn't&lt;/i%gt;
+        be run through the templating engine.
+      &lt;/p%gt;
+      &lt;/div%gt;
+    &lt;/div%gt;
+  &lt;/div%gt;
+&lt;/div%gt;</pre></p>
+
+      <p>File: static.html<br/><pre>&lt;!DOCTYPE html%gt;
+&lt;html%gt;
+  &lt;body%gt;
+    &lt;h1%gt;Static Test&lt;/h1%gt;
+    &lt;p%gt;
+      This is an example of a static html file that isn't run through
+      the dudley processor. The fun content is over
+      at &lt;a href="index.html"%gt;index.html&lt;/a%gt;, though.
+    &lt;/p%gt;
+  &lt;/body%gt;
+&lt;/html%gt;</pre></p>
+
+      <h3>Step 3. Create the _dudley.json File</h3>
+      <p>
+        The <code>_dudley.json</code> file contains information about
+        the site we're generating. In this case, it contains the
+        site's <em>title</em> and <em>sub-title</em>, which are passed
+        directly to the template processor. It uses the <em>theme</em>
+        property to tell the processor to use the bootstrap
+        theme.
+      </p>
+
+      <p>
+        Finally, it uses the <em>ignore</em> property to tell the
+        processor to ignore the <code>_dudley.json</code> file. If we
+        hadn't told the processor to ignore this file, it would have
+        processed it, creating a file called <code>dudley.json</code>
+        in the destination directory.
+      </p>
+
+      <p>File: static.html<br/><pre>{
+  "title": "Tutorial",
+  "subtitle": "Because sometimes it's easier to learn by doing.",
+  "theme": "bootstrap",
+  "ignore": [ "_dudley.json" ]
+}</pre></p>
+
+      <h3>Step 4. Run the dudley Command</h3>
+      <p>
+        To run dudley, use this command from the directory containing
+        the content directory:
+      </p>
+
+      <p style="background-color: black; color: white; width:100%"><pre>dudley --source content --destination static --theme bootstrap</pre></p>
+
+      <h3>Step 5. Enjoy!</h3>
+      <p>
+        Ater invoking dudley, you should find a directory
+        called <code>static</code> with <code>index.html</code> and
+        <code>static.html</code> files from the content we
+        provided. You should also find <code>css</code>
+        and <code>js</code> directories from the template directory.
+      </p>
+
+      <p>
+        Most web browsers allow you to browse file:/// URLs, so you
+        should be able to open a web browser session with the command:
+      </p>
+
+      <p style="background-color: black; color: white; width:100%"><pre>cd static
+google-chrome file://index.html</pre></p>
+
+      <p>
+        This example uses the Chrome browser, but you should be able to substitute
+        your favourite browser in the command line.
+      </p>
+
+      <h3>Conclusion</h3>
+      <p>
+        So what did we learn here?
+      </p>
+
+      <ul>
+        <li>
+          Dudley generates static files from static files. It's not a
+          full fledged CMS, but it could be used as part of one.
+        </li>
+        <li>
+          Dudley takes content from one directory, processes it and
+          puts the result in a different directory.
+        </li>
+        <li>
+          Dudley content input directories use
+          a <code>_dudley.json</code> file to store site info and
+          processing directives.
+        </li>
+        <li>
+          Dudley's output comes from both the theme you specify and
+          the content you provide.
+        </li>
+      </ul>
     </div>
   </div>
 </div>
