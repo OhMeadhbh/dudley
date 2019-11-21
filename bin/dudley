@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
-            require( 'sn-core' );
-var dudley = require( '../dudley' );
-
-require( 'sn-props' ).read( function( props ) {
+var dudley = require( 'dudley' );
+  
+require( 'dudley/node_modules/sn-props' ).read( function( props ) {
   ( new dudley( props ) ).process( function( err ) {
     if( err ) {
       process.stderr.write( err.toString() + "\n" );

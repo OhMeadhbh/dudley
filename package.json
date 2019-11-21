@@ -1,6 +1,7 @@
 {
   "name": "dudley",
   "version": "0.0.4",
+  "main": "dudley.js",
   "description": "Turn Handlebars templates into web sites.",
   "maintainers": [
     {
